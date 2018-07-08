@@ -23,8 +23,8 @@
 		2CEB3EC21602563600548120 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEB3EC11602563600548120 /* Foundation.framework */; };
 		2CEB3EC41602563600548120 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEB3EC31602563600548120 /* CoreGraphics.framework */; };
 		C0E1D4181BF09CB900A565DF /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0E1D4171BF09CB900A565DF /* JavaScriptCore.framework */; };
-		C0E1D41B1BF0A3A100A565DF /* WBNativeApis.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E1D41A1BF0A3A100A565DF /* WBNativeApis.m */; settings = {ASSET_TAGS = (); }; };
-		C0E1D41E1BF0AA2E00A565DF /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E1D41D1BF0AA2E00A565DF /* test.swift */; settings = {ASSET_TAGS = (); }; };
+		C0E1D41B1BF0A3A100A565DF /* WBNativeApis.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E1D41A1BF0A3A100A565DF /* WBNativeApis.m */; };
+		C0E1D41E1BF0AA2E00A565DF /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E1D41D1BF0AA2E00A565DF /* test.swift */; };
 		C0E1D4261BF0B1E900A565DF /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E1D4251BF0B1E900A565DF /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C0E1D4271BF0B25F00A565DF /* JSONKit.h in Sources */ = {isa = PBXBuildFile; fileRef = C0E1D4241BF0B1E900A565DF /* JSONKit.h */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
@@ -186,6 +186,11 @@
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Marcus Westin";
+				TargetAttributes = {
+					2CEB3EBA1602563600548120 = {
+						DevelopmentTeam = 99L3S78CQA;
+					};
+				};
 			};
 			buildConfigurationList = 2CEB3EB51602563600548120 /* Build configuration list for PBXProject "ExampleApp-iOS" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -303,14 +308,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 99L3S78CQA;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ExampleApp-iOS/ExampleApp-iOS-Prefix.pch";
 				INFOPLIST_FILE = "ExampleApp-iOS/ExampleApp-iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alex.blgame;
 				PRODUCT_NAME = "ExampleApp-iOS";
 				SWIFT_OBJC_BRIDGING_HEADER = "ExampleApp-iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -319,13 +327,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 99L3S78CQA;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ExampleApp-iOS/ExampleApp-iOS-Prefix.pch";
 				INFOPLIST_FILE = "ExampleApp-iOS/ExampleApp-iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alex.blgame;
 				PRODUCT_NAME = "ExampleApp-iOS";
 				SWIFT_OBJC_BRIDGING_HEADER = "ExampleApp-iOS-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
