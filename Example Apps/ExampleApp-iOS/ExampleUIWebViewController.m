@@ -108,15 +108,21 @@
 
 - (void)callHandler:(id)sender {
     id data = @{ @"greetingFromObjC": @"Hi there, JS! 回调从objc到html" };
-    [_bridge callHandler:@"testJavascriptHandler" data:data responseCallback:^(id response) {
+    [_bridge callHandler:@"WebViewJavascriptBridgeReady" data:data responseCallback:^(id response) {
+        NSLog(@"testJavascriptHandler responded: %@", response);
+    }];
+
+    id data0 = @{ @"greetingFromObjC": @"Hi there, JS!" };
+    [_bridge callHandler:@"testJavascriptHandler" data:data0 responseCallback:^(id response) {
         NSLog(@"testJavascriptHandler responded: %@", response);
     }];
 }
 
 - (void)loadExamplePage:(UIWebView*)webView {
-    NSString* htmlPath = [[NSBundle mainBundle] pathForResource:@"ExampleApp" ofType:@"html"];
-    NSString* appHtml = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
-    NSURL *baseURL = [NSURL fileURLWithPath:htmlPath];
-    [webView loadHTMLString:appHtml baseURL:baseURL];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://169.254.154.118:3000/"]]];
+//    NSString* htmlPath = [[NSBundle mainBundle] pathForResource:@"ExampleApp" ofType:@"html"];
+//    NSString* appHtml = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
+//    NSURL *baseURL = [NSURL fileURLWithPath:htmlPath];
+//    [webView loadHTMLString:appHtml baseURL:baseURL];
 }
 @end

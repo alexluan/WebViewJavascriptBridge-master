@@ -9,20 +9,33 @@
 #import "ExampleWKWebViewController.h"
 #import "WKWebViewJavascriptBridge.h"
 
-@interface ExampleWKWebViewController ()
+@interface ExampleWKWebViewController ()<WKUIDelegate>
 
 @property WKWebViewJavascriptBridge* bridge;
 
 @end
 
 @implementation ExampleWKWebViewController
-
+{
+    WKWebView* webView;
+}
 - (void)viewWillAppear:(BOOL)animated {
     if (_bridge) { return; }
-    
-    WKWebView* webView = [[NSClassFromString(@"WKWebView") alloc] initWithFrame:self.view.bounds];
+    {
+        WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
+        WKUserContentController *userContentController = [[WKUserContentController alloc] init];
+
+        [userContentController addScriptMessageHandler:self name:@"Share"];
+        [userContentController addScriptMessageHandler:self name:@"Camera"];
+        configuration.userContentController = userContentController;
+        webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:configuration];
+    }
+
     webView.navigationDelegate = self;
+    webView.UIDelegate = self;
     [self.view addSubview:webView];
+
+
     [WKWebViewJavascriptBridge enableLogging];
     _bridge = [WKWebViewJavascriptBridge bridgeForWebView:webView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
         NSLog(@"ObjC received message from JS: %@", data);
@@ -83,6 +96,7 @@
 }
 
 - (void)sendMessage:(id)sender {
+
     [_bridge send:@"A string sent from ObjC to JS" responseCallback:^(id response) {
         NSLog(@"sendMessage got response: %@", response);
     }];
@@ -94,9 +108,16 @@
         NSLog(@"testJavascriptHandler responded: %@", response);
     }];
 }
+-(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
+    NSString *actionname = message.name;
+    id params = message.body;
+    NSLog(@"MessageHandler:%@--%@",actionname,params);
+
+
+}
 
 - (void)loadExamplePage:(WKWebView*)webView {
-    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.1.101:3000/"]]];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://169.254.154.118:3000/"]]];
 //    NSString* htmlPath = [[NSBundle mainBundle] pathForResource:@"ExampleApp" ofType:@"html"];
 //    NSString* appHtml = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
 //    NSURL *baseURL = [NSURL fileURLWithPath:htmlPath];
